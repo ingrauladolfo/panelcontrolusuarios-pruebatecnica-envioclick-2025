@@ -1,0 +1,70 @@
+/* Modal.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background-color: #333333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    color: #FFFFFF;
+}
+
+.modal-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+}
+
+.modal-buttons button:only-child {
+    margin: 0 auto;
+}
+
+.modal-buttons button:first-child {
+    margin-right: auto;
+}
+
+.modal-buttons button:last-child {
+    margin-left: auto;
+}
+
+.modal-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-button-positive {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.modal-button-positive:hover {
+    background-color: #3e8e41;
+}
+
+.modal-button-negative {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+.modal-button-negative:hover {
+    background-color: #1976D2;
+}
