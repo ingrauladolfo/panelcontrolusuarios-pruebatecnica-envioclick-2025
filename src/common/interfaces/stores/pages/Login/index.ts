@@ -5,6 +5,8 @@ export interface UserLogin {
     };
 }
 
+
+
 export interface StoreLogin {
     hasFetched: any;
     users: UserLogin[];

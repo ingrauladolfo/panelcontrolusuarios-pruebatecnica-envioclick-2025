@@ -1,5 +1,5 @@
 // Navbar.tsx
-import { useEffect, type FC } from 'react'
+import { useLayoutEffect, type FC } from 'react'
 import '@/common/styles/components/Navbar/index.css'
 import { Sidebar } from '../Sidebar'
 import { UserProfile } from '../UserProfile'
@@ -27,7 +27,7 @@ export const Navbar: FC = () => {
     const confirmLogout = useUserStore(s => s.confirmLogout)
 
     // hydrate user once on mount so initials are available immediately after mount
-    useEffect(() => {
+    useLayoutEffect(() => {
         loadFromStorage()
     }, [loadFromStorage])
 

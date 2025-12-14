@@ -1,20 +1,11 @@
 import { useLayoutEffect, useRef, useState, type FC } from 'react'
 import '@/common/styles/components/Navbar/index.css'
 import { Modal } from '../../shared/Modal'
+import { FaUser, FaEnvelope } from 'react-icons/fa'
+import type { UserProfileProps } from '@/common/interfaces'
+import { Button } from '@/common/components/shared/Button' // ajusta ruta si aplica
 
-interface Props {
-    user: any
-    initials: string | null
-    loadFromStorage: () => void
-    showLogoutModal: boolean
-    openLogoutModal: () => void
-    closeLogoutModal: () => void
-    confirmLogout: () => void
-    confirmText: string;
-    cancelText: string;
-}
-
-export const UserProfile: FC<Props> = ({
+export const UserProfile: FC<UserProfileProps> = ({
     user,
     initials,
     loadFromStorage,
@@ -23,7 +14,7 @@ export const UserProfile: FC<Props> = ({
     closeLogoutModal,
     confirmLogout,
     confirmText,
-    cancelText
+    cancelText,
 }) => {
     const [open, setOpen] = useState(false)
     const ref = useRef<HTMLDivElement | null>(null)
@@ -44,9 +35,13 @@ export const UserProfile: FC<Props> = ({
 
     return (
         <div className="user-profile" ref={ref}>
-            <button className="avatar-btn" onClick={() => setOpen(!open)}>
-                {initials ?? 'Perfil'}
-            </button>
+            {/* Avatar toggle usando Button compartido */}
+            <Button className="avatar-btn" type="button" onClick={() => setOpen(v => !v)} bgColor="#333333" color='#F7F7F7'>
+                {user?.picture?.thumbnail ? (
+                    <img src={user.picture.thumbnail} alt="Avatar" className="avatar-image" />
+                ) : null}
+                <span className="avatar-initials">{initials ?? 'Perfil'}</span>
+            </Button>
 
             {open && (
                 <div className="profile-dropdown">
@@ -55,13 +50,18 @@ export const UserProfile: FC<Props> = ({
                     {user && (
                         <div className="pd-content">
                             <div className="pd-name">
+                                <FaUser className="pd-icon" />
                                 {user.name.title} {user.name.first} {user.name.last}
                             </div>
-                            <div className="pd-email">{user.email}</div>
+                            <div className="pd-email">
+                                <FaEnvelope className="pd-icon" />
+                                {user.email}
+                            </div>
 
-                            <button className="logout-btn" onClick={openLogoutModal}>
+                            {/* Logout usando Button compartido */}
+                            <Button className="logout-btn" type="button" onClick={openLogoutModal} bgColor="#333333" color='#F7F7F7'>
                                 Cerrar sesión
-                            </button>
+                            </Button>
                         </div>
                     )}
                 </div>

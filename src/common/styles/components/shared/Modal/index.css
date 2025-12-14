@@ -30,6 +30,32 @@
 
 .modal-buttons {
     display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.modal-btn {
+    width: auto;
+    min-width: 120px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-transform: none;
+}
+
+/* cancelar */
+.modal-btn-cancel {
+    opacity: 0.9;
+}
+
+/* confirmar */
+.modal-btn-confirm {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+/* hover */
+.modal-btn:hover {
+    transform: translateY(-1px);
 }
 
 .modal-buttons button:only-child {
@@ -49,22 +75,4 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.modal-button-positive {
-    background-color: #4CAF50;
-    color: #fff;
-}
-
-.modal-button-positive:hover {
-    background-color: #3e8e41;
-}
-
-.modal-button-negative {
-    background-color: #2196F3;
-    color: #fff;
-}
-
-.modal-button-negative:hover {
-    background-color: #1976D2;
 }

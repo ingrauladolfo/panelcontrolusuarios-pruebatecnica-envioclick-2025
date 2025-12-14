@@ -1,7 +1,7 @@
 @import "@fontsource/poppins";
 
 body {
-  background-color: #080710;
+  background-color: #212121;
   display: flex;
   flex-direction: column;
   min-height: 100vh;

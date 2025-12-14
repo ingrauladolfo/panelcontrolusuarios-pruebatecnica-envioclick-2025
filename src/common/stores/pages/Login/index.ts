@@ -1,3 +1,4 @@
+// useLoginStore.ts
 import { create } from 'zustand'
 import axios from 'axios'
 import type { StoreLogin } from '@/common/interfaces'
@@ -18,8 +19,9 @@ export const useLoginStore = create<StoreLogin>((set, get) => ({
         set({ hasFetched: true })
 
         try {
-            const res = await axios.get('https://randomuser.me/api/?results=10')
-            set({ users: res.data.results })
+            // traer usuarios completos (sin guardar nacionalidades aún)
+            const usersRes = await axios.get('https://randomuser.me/api/?results=101')
+            set({ users: usersRes.data.results })
         } catch {
             set({
                 hasFetched: false,
@@ -46,7 +48,19 @@ export const useLoginStore = create<StoreLogin>((set, get) => ({
             return false
         }
 
+        // guardar perfil y usuarios
         localStorage.setItem('userProfile', JSON.stringify(user))
+        localStorage.setItem('users', JSON.stringify(users))
+
+        // calcular nacionalidades únicas a partir de los usuarios y guardarlas al iniciar sesión
+        try {
+            const nationalities = [
+                ...new Set(users.map((u: any) => u.nat).filter(Boolean))
+            ]
+            localStorage.setItem('userNationalities', JSON.stringify(nationalities))
+        } catch {
+            // no bloquear el login si falla al guardar nacionalidades
+        }
 
         set({
             showModal: true,
