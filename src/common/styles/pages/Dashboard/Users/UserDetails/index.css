@@ -1,0 +1,118 @@
+/* layout: two columns desktop, stacked mobile */
+.user-details-grid {
+    display: flex;
+    flex-wrap: wrap;
+    /* allow children to wrap to next row */
+    gap: 24px;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* each column holds a Card */
+.user-details-column {
+    flex: 1 1 0;
+    max-width: 560px;
+    min-width: 280px;
+    /* evita que se encojan demasiado */
+}
+
+/* ensure cards stretch */
+.user-details-column .card {
+    width: 100%;
+}
+
+/* Force the button container to take full row under columns */
+.button-container {
+    flex-basis: 100%;
+    /* ocupa toda la fila */
+    order: 99;
+    /* siempre al final */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+
+/* Button visual */
+.regresar-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: auto;
+}
+
+/* message history styles (unchanged) */
+.message-history {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 8px;
+    max-height: 440px;
+    overflow: auto;
+}
+
+/* each message bubble */
+.message-item {
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 10px 12px;
+    box-shadow: 0 1px 2px rgba(2, 6, 23, 0.06);
+    border: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+/* title bold */
+.message-title {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: #0f172a;
+}
+
+/* content */
+.message-content {
+    font-size: 14px;
+    color: #111827;
+    margin-bottom: 6px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* date smaller, right aligned */
+.message-date {
+    font-size: 12px;
+    color: #6b7280;
+    text-align: right;
+}
+
+/* no messages */
+.no-messages {
+    color: #6b7280;
+    text-align: center;
+    padding: 18px 0;
+}
+
+/* responsive */
+@media (max-width: 980px) {
+    .user-details-grid {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .user-details-column {
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .message-history {
+        max-height: 320px;
+    }
+
+    /* ensure button sits after content on mobile too */
+    .button-container {
+        order: 99;
+        flex-basis: 100%;
+    }
+}

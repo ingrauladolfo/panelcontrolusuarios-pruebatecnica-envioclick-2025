@@ -1,23 +1,5 @@
+import type { UserState } from '@/common/interfaces'
 import { create } from 'zustand'
-
-export type RandomUser = {
-    email: string
-    name: { title: string; first: string; last: string }
-    login?: { username?: string }
-    [k: string]: any
-}
-
-type UserState = {
-    user: RandomUser | null
-    showLogoutModal: boolean
-
-    loadFromStorage: () => void
-    openLogoutModal: () => void
-    closeLogoutModal: () => void
-    confirmLogout: () => void
-    computeInitials: () => string | null
-}
-
 export const useUserStore = create<UserState>((set, get) => ({
     user: null,
     showLogoutModal: false,
@@ -37,6 +19,9 @@ export const useUserStore = create<UserState>((set, get) => ({
 
     confirmLogout: () => {
         localStorage.removeItem('userProfile')
+        localStorage.removeItem('userNationalities')
+        localStorage.removeItem('userMessages')
+        localStorage.removeItem('users')
         set({ user: null, showLogoutModal: false })
         window.location.replace('/')
     },

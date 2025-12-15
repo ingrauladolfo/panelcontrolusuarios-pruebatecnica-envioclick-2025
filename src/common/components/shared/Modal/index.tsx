@@ -3,13 +3,7 @@ import type { ModalProps } from '@/common/interfaces';
 import '@/common/styles/components/shared/Modal/index.css';
 import type { FC } from 'react';
 import { Button } from '@/common/components';
-export const Modal: FC<ModalProps> = ({
-    message,
-    onClose,
-    onConfirm,
-    confirmText,
-    cancelText,
-}) => {
+export const Modal: FC<ModalProps> = ({ message, onClose, onConfirm, confirmText, cancelText }) => {
     return (
         <div className="modal-overlay">
             <div className="modal-content">

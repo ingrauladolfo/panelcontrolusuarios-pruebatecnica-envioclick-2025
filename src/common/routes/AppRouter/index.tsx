@@ -47,7 +47,7 @@ export const AppRouter: FC = () => {
             .map(({ path, title }) => ({ path: normalize(path), title }))
             .filter(p => p.path.startsWith('/dashboard'))
             .map(p => {
-                // child path relativo (ej. '/dashboard/home' -> 'home', '/dashboard/users/:id' -> 'users/:id')
+                // child path relativo (ej. '/dashboard/home' -> 'home', '/dashboard/users/user=:id' -> 'users/user=:id')
                 const rel = p.path === '/dashboard' ? '' : p.path.replace(/^\/dashboard\/?/, '');
                 const Comp = lazyMap[p.path];
                 const element = Comp ? (
@@ -81,10 +81,11 @@ export const AppRouter: FC = () => {
     }, [matchedRoute]);
 
     useLayoutEffect(() => {
-        // si la entrada canonical en pathToTitle difiere (p. ej. navegamos "/"
         if (!matchedRoute) return;
         const canonical = normalize(matchedRoute.path);
-        if (canonical && normalizedPath !== canonical) {
+        // NO redirigir a la ruta canónica literal si contiene parámetros (p. ej. ":id"),
+        // así evitamos que "/dashboard/users/user=7..." sea reemplazado por "/dashboard/users/:id"
+        if (canonical && normalizedPath !== canonical && !canonical.includes(':')) {
             navigate(canonical, { replace: true });
         }
     }, [matchedRoute, normalizedPath, navigate]);

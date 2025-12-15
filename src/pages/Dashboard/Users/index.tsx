@@ -1,14 +1,15 @@
 // DashboardUsers.tsx
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, type FC } from 'react';
 import { Card, Button } from "@/common/components";
 import { useUsersStore } from '@/common/stores/pages/Dashboard/Users';
 import '@/common/styles/pages/Dashboard/Users/index.css';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import { itemsPerPageOptions } from '@/assets/data/pages/Dashboard/Users/paginationarray';
+import { useNavigate } from 'react-router';
 
-export const DashboardUsers = () => {
-    const { users, getUsers, getNationalities, currentPage, itemsPerPage, handlePageChange, handleItemsPerPageChange, renderPageNumbers, nationalities, gender, nationality, age, handleGenderChange, handleNationalityChange, handleAgeChange, resetFilters } = useUsersStore();
-
+export const DashboardUsers: FC = () => {
+    const { users, getUsers, getNationalities, currentPage, itemsPerPage, handlePageChange, handleItemsPerPageChange, renderPageNumbers, nationalities, gender, nationality, age, handleGenderChange, handleNationalityChange, handleAgeChange, resetFilters, handleExportCSV, handleDeleteUser, handleViewUser } = useUsersStore();
+    const navigate = useNavigate();
     useLayoutEffect(() => {
         getUsers();
         getNationalities();
@@ -26,14 +27,7 @@ export const DashboardUsers = () => {
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
 
-    const hasFilters =
-        gender !== '' ||
-        nationality !== '' ||
-        age !== 0;
-
-    const handleExportCSV = () => {
-        console.log('Exportar a CSV');
-    };
+    const hasFilters = gender !== '' || nationality !== '' || age !== 0;
 
     return (
         <div className="dashboard-users">
@@ -70,12 +64,17 @@ export const DashboardUsers = () => {
             <div className="dashboard-users-cards">
                 {filteredUsers.slice(start, end).map((user) => (
                     <Card
+                        type='normal'
                         key={user.login.uuid}
+                        user={user}                          // <-- agregado
                         title={`${user.name.first} ${user.name.last}`}
                         image={user.picture.medium}
                         alt={user.name.first}
+                        onDelete={() => handleDeleteUser(navigate, user.login.uuid)}
+                        onView={() => handleViewUser(navigate, user.login.uuid)}
                     />
                 ))}
+
             </div>
 
             <div className="dashboard-users-pagination">

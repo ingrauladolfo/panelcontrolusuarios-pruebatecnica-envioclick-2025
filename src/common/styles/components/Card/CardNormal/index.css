@@ -93,17 +93,20 @@
     transition: opacity 0.18s ease;
     position: absolute;
     bottom: 16px;
-    pointer-events: auto;
     z-index: 10;
 }
 
 /* left / right placement unchanged */
 .card-action-section.left {
     left: 16px;
+    cursor: pointer;
+    pointer-events: auto;
 }
 
 .card-action-section.right {
     right: 16px;
+    cursor: pointer;
+    pointer-events: auto;
 }
 
 /* Show only the specific section being hovered or focused (keyboard accessible) */
@@ -117,7 +120,7 @@
     display: block;
     width: 20px;
     height: 20px;
-    cursor: pointer;
+
 }
 
 .card-icon {
@@ -163,4 +166,35 @@
 
 .card-action-link:hover .card-action-text {
     color: #fff;
+}
+
+.card-export-section {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.18s ease;
+}
+
+.card-export-section:hover {
+    opacity: 1;
+}
+
+/* index.css */
+.card-send-message-section {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.18s ease;
+}
+
+.card-send-message-section:hover {
+    opacity: 1;
 }

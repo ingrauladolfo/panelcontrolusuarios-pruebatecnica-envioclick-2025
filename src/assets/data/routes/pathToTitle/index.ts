@@ -5,5 +5,5 @@ export const pathToTitle: PathToTitle[] = [
     { path: '/login', title: 'Login | EnvíoClick' },
     { path: '/dashboard/home', title: 'Dashboard - Inicio | EnvíoClick' },
     { path: '/dashboard/users', title: 'Dashboard - Usuarios | EnvíoClick' },
-    { path: '/dashboard/users/:id', title: 'Dashboard - Usuario | EnvíoClick' },
+    { path: '/dashboard/user', title: 'Dashboard - Usuario | EnvíoClick' },
 ];

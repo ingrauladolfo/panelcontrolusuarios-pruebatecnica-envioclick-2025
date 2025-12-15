@@ -14,6 +14,7 @@ export const useLoginStore = create<StoreLogin>((set, get) => ({
     setUsername: (username) => set({ username }),
     setPassword: (password) => set({ password }),
 
+    // useLoginStore.ts
     fetchUsers: async () => {
         if (get().hasFetched) return
         set({ hasFetched: true })
@@ -30,7 +31,6 @@ export const useLoginStore = create<StoreLogin>((set, get) => ({
             })
         }
     },
-
     login: async () => {
         const { username, password, users } = get()
 
@@ -39,7 +39,7 @@ export const useLoginStore = create<StoreLogin>((set, get) => ({
                 u.login?.username === username &&
                 u.login?.password === password
         )
-
+        console.log({ user })
         if (!user) {
             set({
                 showModal: true,

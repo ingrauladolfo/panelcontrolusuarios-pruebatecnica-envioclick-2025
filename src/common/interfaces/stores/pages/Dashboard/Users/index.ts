@@ -9,6 +9,7 @@ export interface UsersStore {
     gender: string;
     nationality: string;
     age: number;
+    selectedUserId: string | null;
     getUsers: () => void;
     getNationalities: () => void;
     handlePageChange: (page: any) => void;
@@ -18,4 +19,10 @@ export interface UsersStore {
     handleAgeChange: (e: any) => void;
     resetFilters: () => void;
     renderPageNumbers: (pages: number, currentPage: number) => (number | string)[];
+    handleExportCSV: () => void;
+    handleExportUserCSV: (userId: string) => void;
+    handleDeleteUser: (navigate: any, userId: string) => void;
+    handleViewUser: (navigate: any, userId: string) => void;
+    handleSendMessage: (userId: string, message: { title: string; content: string }) => void;
+
 }
