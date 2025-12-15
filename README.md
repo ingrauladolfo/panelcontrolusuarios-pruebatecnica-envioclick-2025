@@ -1,14 +1,35 @@
-# CRUD Macropay Test
+# Panel de control de usuarios Envío Click Test
 
-Prueba Técnica para Macropay para la posición Frontend 2024
+Prueba Técnica para Envíoclick para la posición Frontend 2025
 
 ## 🛠 Tecnologías usadas
-
-<div align="center">
-    <a href='https://react.dev/' target='_blank'> <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" height="50px" /> </a>
-    <a href='https://vitejs.dev/' target='_blank'> <img src="https://vitejs.dev/logo.svg" alt="Vite" height="50px" /> </a>
-    <a href='https://developer.mozilla.org/es/docs/Web/CSS' target='_blank'> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNe5JyPxqe8Sxm3lVcLl5yoyBZScUF997FCQ&s" alt="CSS" height="50px" /></a>
-    <a href='https://zustand.docs.pmnd.rs/getting-started/introduction' target='_blank'> <img src="https://github.com/pmndrs/zustand/raw/main/docs/bear.jpg" alt="Zustand" height="50px" /></a>
+<div align=center>
+    <div align=center style="display: flex; justify-content: space-around;">
+        <div>
+            <a href='https://react.dev/' target='_blank'>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React"
+                    height="50px" /><br>React</a>
+        </div>
+        <div>
+            <a href='https://developer.mozilla.org/es/docs/Web/CSS' target='_blank'>
+                <img src="https://vitejs.dev/logo.svg" alt="Vite" height="50px" />
+                <br>Vite</a>
+        </div>
+        <div>
+            <a href='https://zustand.docs.pmnd.rs/getting-started/introduction' target='_blank'>
+                <img src="https://repository-images.githubusercontent.com/180328715/fca49300-e7f1-11ea-9f51-cfd949b31560"
+                    alt="Zustand" height="50px" />
+                <br>Zustand
+            </a>
+        </div>
+        <div>
+            <a href='https://www.typescriptlang.org/docs/' target='_blank'>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/500px-Typescript_logo_2020.svg.png"
+                    alt="TypeScript" height="50px" />
+                <br>TypeScript
+            </a>
+        </div>
+    </div>
 </div>
 
 ## Instalación y Correr el Proyecto
