@@ -1,0 +1,200 @@
+/* index.css */
+.card {
+    position: relative;
+    max-width: 206px;
+    width: 100%;
+    border: 1px solid #EAECF0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: auto;
+    padding: 16px 0px;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+    padding: 0px;
+    margin-bottom: 10px;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+    padding: 0px;
+}
+
+.card-info-text {
+    font-size: 14px;
+    line-height: 20px;
+    width: 100%;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+    word-wrap: break-word;
+    margin-bottom: 0px;
+}
+
+.card-img-container {
+    width: 100%;
+    max-width: 70px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+    padding: 0px;
+}
+
+.card-image {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 16px;
+    margin-top: 8px;
+}
+
+/* --- Changed: make each action appear only when hovered individually --- */
+.card-action-section {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    width: 66px;
+    height: 20px;
+    justify-content: space-between;
+    gap: 0px 6px;
+    transition: opacity 0.18s ease;
+    position: absolute;
+    bottom: 16px;
+    z-index: 10;
+}
+
+/* left / right placement unchanged */
+.card-action-section.left {
+    left: 16px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.card-action-section.right {
+    right: 16px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+/* Show only the specific section being hovered or focused (keyboard accessible) */
+.card-action-section:hover,
+.card-action-section:focus-within {
+    opacity: 1;
+}
+
+/* --- keep icon / text styles --- */
+.card-action-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+
+}
+
+.card-icon {
+    width: 100%;
+    height: 100%;
+    transition: filter 0.2s, transform 0.2s;
+    filter: invert(35%) sepia(25%) saturate(393%) hue-rotate(176deg) brightness(88%) contrast(99%);
+    margin-bottom: 8px;
+}
+
+.card-icon:hover {
+    transition: filter 0.2s, transform 0.2s;
+    filter: invert(70%) sepia(14%) saturate(317%) hue-rotate(179deg) brightness(90%) contrast(92%);
+}
+
+.card-action-text {
+    font-size: 14px;
+    line-height: 20px;
+    width: 40px;
+    height: 20px;
+    font-weight: 500;
+    text-align: left;
+    color: #475467;
+}
+
+/* ensure text also highlights when its parent is hovered */
+.card-action-section:hover .card-action-text,
+.card-action-section:focus-within .card-action-text {
+    color: #fff;
+}
+
+/* link helper (unchanged) */
+.card-action-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.card-action-link:hover .card-icon {
+    transition: filter 0.2s, transform 0.2s;
+    filter: invert(70%) sepia(14%) saturate(317%) hue-rotate(179deg) brightness(90%) contrast(92%);
+}
+
+.card-action-link:hover .card-action-text {
+    color: #fff;
+}
+
+.card-export-section {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.18s ease;
+}
+
+.card-export-section:hover {
+    opacity: 1;
+}
+
+/* index.css */
+.card-send-message-section {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.18s ease;
+}
+
+.card-send-message-section:hover {
+    opacity: 1;
+}

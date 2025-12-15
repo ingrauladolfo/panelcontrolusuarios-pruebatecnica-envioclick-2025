@@ -1,0 +1,167 @@
+.app-navbar {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(0.5rem, 1.6vw, 0.9rem);
+    background: inherit;
+    border-bottom: 1px solid #e6e6e6;
+    color: #fff;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu-btn {
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.brand {
+    font-weight: 600;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    margin-top: 18px;
+    margin-left: 10px;
+}
+
+/* Sidebar */
+.app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    max-width: 280px;
+    height: 100vh;
+    background: #1A1D23;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
+    z-index: 50;
+}
+
+.app-sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-inner {
+    padding: 16px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.sidebar-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #e6e6e6;
+    list-style: none;
+}
+
+.sidebar-link {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+}
+
+.sidebar-link:hover {
+    color: #666;
+}
+
+/* Dropdown */
+.user-profile {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.avatar-btn {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    background: inherit;
+    cursor: pointer;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    margin-top: 8px;
+    min-width: 220px;
+    background: inherit;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    padding: 12px;
+    z-index: 100;
+}
+
+
+.pd-loading,
+.pd-empty {
+    padding: 8px 0;
+}
+
+.pd-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.logout-btn {
+    align-self: flex-end;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #e6e6e6;
+    background: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.avatar-image {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.avatar-btn {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-initials {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pd-icon {
+    margin-right: 10px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.pd-name,
+.pd-email {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-icon {
+    margin-right: 10px;
+    font-size: 18px;
+    vertical-align: middle;
+}

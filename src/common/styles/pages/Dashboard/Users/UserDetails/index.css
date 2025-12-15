@@ -1,0 +1,208 @@
+/* layout: two columns desktop, stacked mobile */
+.user-details-grid {
+    display: flex;
+    flex-wrap: wrap;
+    /* allow children to wrap to next row */
+    gap: 24px;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* each column holds a Card */
+.user-details-column {
+    flex: 1 1 0;
+    max-width: 560px;
+    min-width: 280px;
+    /* evita que se encojan demasiado */
+}
+
+/* ensure cards stretch */
+.user-details-column .card {
+    width: 100%;
+}
+
+/* Force the button container to take full row under columns */
+.button-container {
+    flex-basis: 100%;
+    /* ocupa toda la fila */
+    order: 99;
+    /* siempre al final */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+
+/* Button visual */
+.regresar-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: auto;
+}
+
+/* message history styles (unchanged) */
+.message-history {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 8px;
+    max-height: 440px;
+    overflow: auto;
+}
+
+/* each message bubble */
+.message-item {
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 10px 12px;
+    box-shadow: 0 1px 2px rgba(2, 6, 23, 0.06);
+    border: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+/* title bold */
+.message-title {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: #0f172a;
+}
+
+/* content */
+.message-content {
+    font-size: 14px;
+    color: #111827;
+    margin-bottom: 6px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* date smaller, right aligned */
+.message-date {
+    font-size: 12px;
+    color: #6b7280;
+    text-align: right;
+}
+
+/* no messages */
+.no-messages {
+    color: #6b7280;
+    text-align: center;
+    padding: 18px 0;
+}
+
+/* responsive */
+@media (max-width: 980px) {
+    .user-details-grid {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .user-details-column {
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .message-history {
+        max-height: 320px;
+    }
+
+    /* ensure button sits after content on mobile too */
+    .button-container {
+        order: 99;
+        flex-basis: 100%;
+    }
+}
+
+/* address area */
+.user-address {
+    margin-top: 0;
+    /* antes 12px */
+    padding: 0;
+    /* opcional: iguala a <p> */
+    border-radius: 0;
+    background: inherit;
+    cursor: context-menu;
+    user-select: text;
+    color: #fff;
+}
+
+.address-text {
+    white-space: pre-wrap;
+    margin-top: 6px;
+    color: #fff;
+    font-size: 14px;
+}
+
+/* custom context menu */
+.custom-context-menu {
+    position: fixed;
+    z-index: 2000;
+    min-width: 220px;
+    background: #fff;
+    color: #111827;
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    padding: 8px;
+    transform-origin: top left;
+}
+
+/* menu items */
+.custom-context-menu .context-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    font-size: 14px;
+    color: #0f172a;
+    background: transparent;
+    border: none;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+}
+
+.custom-context-menu .context-item:hover {
+    background: rgba(2, 6, 23, 0.04);
+}
+
+.custom-context-menu .coords-item {
+    flex-direction: column;
+    cursor: default;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(2, 6, 23, 0.04);
+    margin-bottom: 6px;
+}
+
+.custom-context-menu .coords-label {
+    font-weight: 600;
+    font-size: 13px;
+    color: #111827;
+}
+
+.custom-context-menu .coords-value {
+    font-size: 13px;
+    color: #374151;
+    margin-top: 4px;
+}
+
+/* small copied badge */
+.context-copied {
+    margin-top: 6px;
+    font-size: 12px;
+    background-color: inherit;
+    color: #059669;
+    padding-left: 10px;
+}
+
+/* responsive: keep menu within viewport if near edges */
+@media (max-width: 480px) {
+    .custom-context-menu {
+        min-width: 180px;
+        font-size: 13px;
+    }
+}

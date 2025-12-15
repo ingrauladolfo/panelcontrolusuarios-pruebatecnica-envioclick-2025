@@ -1,0 +1,111 @@
+/* index.css (reemplazar/añadir estas reglas) */
+
+/* base colors / mobile first sizing */
+:root {
+    --gap: 1rem;
+    --min-col: 220px;
+    /* mínimo ancho de cada columna (ajusta para tus breakpoints) */
+    --max-cols: 4;
+}
+
+.dashboard-home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    max-width: 100vw;
+    color: #FFFFFF;
+}
+
+.saludo {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    margin-bottom: 1rem;
+}
+
+.saludo img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 15%;
+    /* ajusta el tamaño de la imagen */
+    height: 15%;
+    margin-left: 0.5rem;
+}
+
+/* contenedor centrado y adaptable */
+/* max-width evita que haya más de 4 columnas en pantallas muy anchas */
+.buttons {
+    display: grid;
+    gap: var(--gap, 1rem);
+    width: 100%;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(var(--min-col, 220px), 1fr));
+    max-width: calc(var(--min-col, 220px) * var(--max-cols, 4) + (var(--gap, 1rem) * (var(--max-cols, 4) - 1)));
+    justify-items: center;
+    align-items: stretch;
+    box-sizing: border-box;
+    padding: 0 1rem;
+}
+
+/* botón ocupa todo el ancho de la celda y mantiene icon+label alineados */
+/* .button {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(0.5rem, 1.6vw, 0.9rem);
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: background-color .15s ease, transform .08s ease;
+    font-weight: 700;
+    text-decoration: none;
+     for anchor 
+} */
+
+/* contenido interno para manejar icon + label */
+.button-content {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: center;
+    font-size: clamp(0.95rem, 2.4vw, 1.05rem);
+}
+
+/* icon a la izquierda */
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15em;
+    opacity: 0.98;
+    /* le damos un tamaño consistente */
+    width: 1.4em;
+    height: 1.4em;
+}
+
+/* etiqueta */
+.label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* hover / active */
+.button:hover {
+    transform: translateY(-1px);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+/* loading */
+.loading {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    text-align: center;
+    padding: 1rem;
+}
