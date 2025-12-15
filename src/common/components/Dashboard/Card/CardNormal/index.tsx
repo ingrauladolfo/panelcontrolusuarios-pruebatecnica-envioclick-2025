@@ -11,6 +11,7 @@ import { useUsersStore } from '@/common/stores/pages/Dashboard/Users';
 import { SendMessageModal } from '@/common/components/shared/Modal/SendMessageModal';
 
 export const CardNormal = ({ title, image, alt, children, onDelete, onView, className, user }: CardNormalProps) => {
+    console.log({ user })
     const [showModal, setShowModal] = useState(false);
     const [showSendMessageModal, setShowSendMessageModal] = useState(false);
     const handleExportUserCSV = useUsersStore(state => state.handleExportUserCSV);
@@ -88,7 +89,7 @@ export const CardNormal = ({ title, image, alt, children, onDelete, onView, clas
 
             {showModal && (
                 <Modal
-                    message={`Seguro que quieres borrar a ${title}?`}
+                    message={`Seguro que quieres borrar el id ${user.login.uuid} (${title})?`}
                     onClose={handleCancelDelete}
                     onConfirm={handleConfirmDelete}
                     confirmText="Sí"

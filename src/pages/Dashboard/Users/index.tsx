@@ -6,6 +6,7 @@ import '@/common/styles/pages/Dashboard/Users/index.css';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import { itemsPerPageOptions } from '@/assets/data/pages/Dashboard/Users/paginationarray';
 import { useNavigate } from 'react-router';
+import { FaUsers } from 'react-icons/fa6';
 
 export const DashboardUsers: FC = () => {
     const { users, getUsers, getNationalities, currentPage, itemsPerPage, handlePageChange, handleItemsPerPageChange, renderPageNumbers, nationalities, gender, nationality, age, handleGenderChange, handleNationalityChange, handleAgeChange, resetFilters, handleExportCSV, handleDeleteUser, handleViewUser } = useUsersStore();
@@ -31,7 +32,10 @@ export const DashboardUsers: FC = () => {
 
     return (
         <div className="dashboard-users">
-            <h1 className="dashboard-users-title">Usuarios</h1>
+            <div className="dashboard-users-header">
+                <FaUsers className="dashboard-users-icon" />
+                <h1 className="dashboard-users-title">Usuarios</h1>
+            </div>
 
             <div className="dashboard-users-filters">
                 <select id='select-gender' className="dashboard-users-filter" value={gender} onChange={handleGenderChange}>

@@ -1,73 +1,34 @@
-# React + TypeScript + Vite
+# CRUD Macropay Test
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Prueba Técnica para Macropay para la posición Frontend 2024
 
-Currently, two official plugins are available:
+## 🛠 Tecnologías usadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<div align="center">
+    <a href='https://react.dev/' target='_blank'> <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" height="50px" /> </a>
+    <a href='https://vitejs.dev/' target='_blank'> <img src="https://vitejs.dev/logo.svg" alt="Vite" height="50px" /> </a>
+    <a href='https://developer.mozilla.org/es/docs/Web/CSS' target='_blank'> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNe5JyPxqe8Sxm3lVcLl5yoyBZScUF997FCQ&s" alt="CSS" height="50px" /></a>
+    <a href='https://zustand.docs.pmnd.rs/getting-started/introduction' target='_blank'> <img src="https://github.com/pmndrs/zustand/raw/main/docs/bear.jpg" alt="Zustand" height="50px" /></a>
+</div>
 
-## React Compiler
+## Instalación y Correr el Proyecto
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### 1. Clonar el proyecto usando Git:
 
-## Expanding the ESLint configuration
+| Comando (Command)                                        | Uso (Usage)                   |
+| -------------------------------------------------------- | ----------------------------- |
+| `https://github.com/ingrauladolfo/panelcontrolusuarios-pruebatecnica-envioclick-2025.git`| Para usarlo con **HTTPS**     |
+| `git@github.com:ingrauladolfo/panelcontrolusuarios-pruebatecnica-envioclick-2025.git`| Para usarlo con **SSH**       |
+| `gh repo clone ingrauladolfo/panelcontrolusuarios-pruebatecnica-envioclick-2025`| Para usarlo en **GitHub CLI** |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 2. Una vez clonado el repositorio, instalar las dependencias:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Comando (Command) | Descripción (Description) |
+| ----------------- | ------------------------- |
+| `npm install`     | Versión completa          |
+| `npm i`           | Versión corta             |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 3. Correr el proyecto usando el comando `npm run dev`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Author
+[Ing. Raúl Adolfo Torres Vargas](https://ingrauladolfo-portfolio.vercel.app/)

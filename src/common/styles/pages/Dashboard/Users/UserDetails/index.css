@@ -116,3 +116,93 @@
         flex-basis: 100%;
     }
 }
+
+/* address area */
+.user-address {
+    margin-top: 0;
+    /* antes 12px */
+    padding: 0;
+    /* opcional: iguala a <p> */
+    border-radius: 0;
+    background: inherit;
+    cursor: context-menu;
+    user-select: text;
+    color: #fff;
+}
+
+.address-text {
+    white-space: pre-wrap;
+    margin-top: 6px;
+    color: #fff;
+    font-size: 14px;
+}
+
+/* custom context menu */
+.custom-context-menu {
+    position: fixed;
+    z-index: 2000;
+    min-width: 220px;
+    background: #fff;
+    color: #111827;
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    padding: 8px;
+    transform-origin: top left;
+}
+
+/* menu items */
+.custom-context-menu .context-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    font-size: 14px;
+    color: #0f172a;
+    background: transparent;
+    border: none;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+}
+
+.custom-context-menu .context-item:hover {
+    background: rgba(2, 6, 23, 0.04);
+}
+
+.custom-context-menu .coords-item {
+    flex-direction: column;
+    cursor: default;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(2, 6, 23, 0.04);
+    margin-bottom: 6px;
+}
+
+.custom-context-menu .coords-label {
+    font-weight: 600;
+    font-size: 13px;
+    color: #111827;
+}
+
+.custom-context-menu .coords-value {
+    font-size: 13px;
+    color: #374151;
+    margin-top: 4px;
+}
+
+/* small copied badge */
+.context-copied {
+    margin-top: 6px;
+    font-size: 12px;
+    background-color: inherit;
+    color: #059669;
+    padding-left: 10px;
+}
+
+/* responsive: keep menu within viewport if near edges */
+@media (max-width: 480px) {
+    .custom-context-menu {
+        min-width: 180px;
+        font-size: 13px;
+    }
+}

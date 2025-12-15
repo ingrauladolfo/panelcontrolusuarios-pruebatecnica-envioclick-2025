@@ -22,6 +22,15 @@
     margin-bottom: 1rem;
 }
 
+.saludo img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 15%;
+    /* ajusta el tamaño de la imagen */
+    height: 15%;
+    margin-left: 0.5rem;
+}
+
 /* contenedor centrado y adaptable */
 /* max-width evita que haya más de 4 columnas en pantallas muy anchas */
 .buttons {

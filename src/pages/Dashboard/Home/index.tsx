@@ -30,7 +30,7 @@ export const DashboardHome = () => {
     return (
         <div className="dashboard-home">
             <h1 className="saludo">
-                {saludo} {userProfile.name.title} {userProfile.name.first} {userProfile.name.last}
+                {saludo} {userProfile.name.title} {userProfile.name.first} {userProfile.name.last} al panel de control de usuarios de <img src="/assets/img/isologo-envioclick.webp" alt="Logo de Envioclic" />
             </h1>
 
             <div className="buttons">

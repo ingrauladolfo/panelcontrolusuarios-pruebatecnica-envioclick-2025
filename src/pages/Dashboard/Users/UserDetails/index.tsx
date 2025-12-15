@@ -1,14 +1,36 @@
-// DashboardUserDetails.tsx
-import { useLayoutEffect, type FC } from 'react';
+import { useLayoutEffect, useState, useRef, useEffect, type FC } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import '@/common/styles/pages/Dashboard/Users/UserDetails/index.css';
-import { Button, Card } from '@/common/components';
+import { Button, Card, Modal } from '@/common/components';
 import { useUserDetailsStore } from '@/common/stores/pages/Dashboard/Users/UserDetails';
 
 export const DashboardUserDetails: FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { user, loading, getUser, resetUser, messages, getMessages } = useUserDetailsStore();
+    const {
+        user,
+        loading,
+        getUser,
+        resetUser,
+        messages,
+        getMessages,
+        formatMessagesDate,
+        formatDate,
+        getGenderLabel,
+        getCountryName,
+        getFullAddress,
+        handleCopyCoordinates,
+        formatTimePeriod
+    } = useUserDetailsStore();
+
+    // context menu state
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [menuPos, setMenuPos] = useState({ x: 0, y: 0 });
+    const menuRef = useRef<HTMLDivElement | null>(null);
+
+    // modal state for copy feedback
+    const [showCopyModal, setShowCopyModal] = useState(false);
+    const [copyMessage, setCopyMessage] = useState(''); // texto que mostrará el modal
 
     // resolver id desde query
     const resolveId = (): string | null => {
@@ -31,46 +53,81 @@ export const DashboardUserDetails: FC = () => {
         };
     }, [resetUser]);
 
-    const formatDate = (iso?: string) => {
-        if (!iso) return '';
-        const d = new Date(iso);
-        if (Number.isNaN(d.getTime())) return '';
-        const pad = (n: number) => String(n).padStart(2, '0');
-        const dd = pad(d.getDate());
-        const mm = pad(d.getMonth() + 1);
-        const yyyy = d.getFullYear();
-        const hh = pad(d.getHours());
-        const min = pad(d.getMinutes());
-        return `${dd}/${mm}/${yyyy} - ${hh}:${min}`;
+    // hide menu on outside click / escape / scroll
+    useEffect(() => {
+        const onDocClick = (e: MouseEvent) => {
+            if (!menuRef.current) return;
+            if (!(e.target instanceof Node)) return;
+            if (!menuRef.current.contains(e.target)) setMenuOpen(false);
+        };
+        const onEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenuOpen(false); };
+        window.addEventListener('click', onDocClick);
+        window.addEventListener('keydown', onEsc);
+        window.addEventListener('scroll', () => setMenuOpen(false), true);
+        return () => {
+            window.removeEventListener('click', onDocClick);
+            window.removeEventListener('keydown', onEsc);
+            window.removeEventListener('scroll', () => setMenuOpen(false), true);
+        };
+    }, []);
+
+    const formatCoordinates = (loc?: any) => {
+        const lat = loc?.coordinates?.latitude ?? '';
+        const lon = loc?.coordinates?.longitude ?? '';
+        const nLat = String(lat).replace(/[^\d\.\-]/g, '');
+        const nLon = String(lon).replace(/[^\d\.\-]/g, '');
+        return `${nLat}, ${nLon}`;
     };
 
-    if (!id) {
-        return <div className="error-message">No se encontró el ID del usuario</div>;
-    }
+    const onAddressContextMenu = (e: React.MouseEvent) => {
+        e.preventDefault();
+        setMenuPos({ x: e.clientX, y: e.clientY });
+        setMenuOpen(true);
+    };
 
-    if (loading) {
-        return <div className="loading-message">Cargando usuario...</div>;
-    }
+    const onCopyClick = async () => {
+        const coords = formatCoordinates(user?.location);
+        const ok = await handleCopyCoordinates(coords);
+        if (ok) {
+            setCopyMessage('Copiado en el portapapeles');
+        } else {
+            setCopyMessage('No se pudo copiar las coordenadas');
+        }
+        setMenuOpen(false);
+        setShowCopyModal(true);
+    };
 
-    if (!user) {
-        // si aquí aún no hay usuario, mostrar mensaje diagnóstico útil en vez de fallo silencioso
-        return <div className="error-message">No se encontró el usuario con id: <strong>{id}</strong></div>;
-    }
+    if (!id) return <div className="error-message">No se encontró el ID del usuario</div>;
+    if (loading) return <div className="loading-message">Cargando usuario...</div>;
+    if (!user) return <div className="error-message">No se encontró el usuario con id: <strong>{id}</strong></div>;
+
     return (
         <div className="user-details-grid">
             {/* Left: detalle */}
             <div className="user-details-column">
                 <Card type="detail" user={user}>
-                    <p>Género: {user.gender}</p>
-                    <p>Edad: {user.dob?.age}</p>
-                    <p>Nacionalidad: {user.nat}</p>
-                    <p>Email: {user.email}</p>
-                    <p>Teléfono: {user.phone}</p>
-                    <p>Celular: {user.cell}</p>
+                    <p>Género: {getGenderLabel(user?.gender)}</p>
+                    <p>Fecha: {formatDate(user?.dob?.date)}</p>
+                    <p>Edad: {formatTimePeriod(user?.dob?.age)}</p>
+                    <p>Nacionalidad: {getCountryName(user.nat)}</p>
+                    <p>Email: {user?.email}</p>
+                    <p>Teléfono: {user?.phone}</p>
+                    <p>Celular: {user?.cell}</p>
+                    <p>Dirección:<span onContextMenu={onAddressContextMenu} title="Click derecho para ver opciones" aria-label="Dirección del usuario"> {getFullAddress(user?.location)}</span></p>
+                    <p>Fidelidad: {formatTimePeriod(user?.registered?.age)}</p>
+                    <p>Miembro desde: {formatDate(user?.registered?.date)} </p>
+
+                    {/* Dirección: attach contextmenu */}
+                    {/*  <div
+                        title="Click derecho para ver opciones"
+                        aria-label="Dirección del usuario"
+                    >
+                    </div> */}
                 </Card>
             </div>
+
+            {/* Right: historial de mensajes (si existen) */}
             {messages && messages.length > 0 && (
-                // Right: historial de mensajes
                 <div className="user-details-column">
                     <Card type="detail" user={user} image={user.picture.medium} title={`Historial de mensajes con ${user.name?.title ?? ''} ${user.name?.first ?? ''} ${user.name?.last ?? ''}`}>
                         <div className="message-history">
@@ -78,13 +135,15 @@ export const DashboardUserDetails: FC = () => {
                                 <div className="message-item" key={idx}>
                                     <div className="message-title">{m.title}</div>
                                     <div className="message-content">{m.content}</div>
-                                    <div className="message-date">{formatDate(m.date)}</div>
+                                    <div className="message-date">{formatMessagesDate(m.date)}</div>
                                 </div>
                             ))}
                         </div>
                     </Card>
                 </div>
             )}
+
+            {/* button row */}
             <div className="button-container">
                 <Button
                     type="button"
@@ -95,6 +154,30 @@ export const DashboardUserDetails: FC = () => {
                     Regresar
                 </Button>
             </div>
+
+            {/* custom context menu */}
+            {menuOpen && (
+                <div
+                    ref={menuRef}
+                    className="custom-context-menu"
+                    style={{ left: menuPos.x, top: menuPos.y }}
+                    role="menu"
+                >
+                    <div className="coords-value" onClick={onCopyClick}>
+                        {formatCoordinates(user?.location)}
+                    </div>
+                </div>
+            )}
+
+            {/* modal feedback after copy */}
+            {showCopyModal && (
+                <Modal
+                    message={copyMessage}
+                    onClose={() => setShowCopyModal(false)}
+                    onConfirm={() => setShowCopyModal(false)}
+                    confirmText="Aceptar"
+                />
+            )}
         </div>
     );
 };

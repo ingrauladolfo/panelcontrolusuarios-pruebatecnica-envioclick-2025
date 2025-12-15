@@ -1,5 +1,8 @@
+// useUserDetailsStore.ts
+import { countryCodes } from "@/assets/data/pages/Dashboard/Users/UserDetails";
 import type { UserDetailsStore } from "@/common/interfaces";
 import { create } from "zustand";
+
 
 export const useUserDetailsStore = create<UserDetailsStore>((set, get) => ({
     user: undefined,
@@ -88,5 +91,73 @@ export const useUserDetailsStore = create<UserDetailsStore>((set, get) => ({
             console.error('getMessages error', err);
             set({ messages: [] });
         }
+    },
+
+    formatMessagesDate: (iso?: string) => {
+        if (!iso) return '';
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return '';
+        const pad = (n: number) => String(n).padStart(2, '0');
+        const dd = pad(d.getDate());
+        const mm = pad(d.getMonth() + 1);
+        const yyyy = d.getFullYear();
+        const hh = pad(d.getHours());
+        const min = pad(d.getMinutes());
+        return `${dd}/${mm}/${yyyy} a las ${hh}:${min}`;
+    },
+    formatDate: (iso?: string) => {
+        if (!iso) return '';
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return '';
+        const pad = (n: number) => String(n).padStart(2, '0');
+        const dd = pad(d.getDate());
+        const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        const mm = monthNames[d.getMonth()];
+        /*  const mm = pad(d.getMonth() + 1); <- por si se usa*/
+        const yyyy = d.getFullYear();
+        return `${dd} de ${mm} de ${yyyy}`;
+    },
+    getCountryName: (code: string) => {
+        return `${countryCodes[code] || code} (${code})`;
+    },
+    getGenderLabel: (gender: string) => {
+        if (gender === 'male') return 'Hombre';
+        if (gender === 'female') return 'Mujer';
+        return '';
+    },
+    // useUserDetailsStore.ts
+    getFullAddress: (location: any) => {
+        if (!location) return '';
+        const street = `${location.street.number} ${location.street.name}`;
+        const city = location.city;
+        const state = location.state;
+        const country = location.country;
+        const postcode = location.postcode;
+/*         const coordinates = `${location.coordinates.latitude}, ${location.coordinates.longitude}`;
+ */        return `${street}, ${city}, ${state}, ${country}, ${postcode}`;
+    },
+    handleCopyCoordinates: async (coords: string) => {
+        try {
+            await navigator.clipboard.writeText(coords);
+            return true;
+        } catch {
+            console.warn('No se pudo copiar las coordenadas');
+            return false;
+        }
+    },
+    // useUserDetailsStore.ts
+    formatTimePeriod: (years: number) => {
+        if (years === 1) return '1 año';
+        if (years < 1) {
+            const months = years * 12;
+            if (months < 1) {
+                const days = Math.floor(years * 365);
+                if (days === 1) return '1 día';
+                return `${days} días`;
+            }
+            if (months === 1) return '1 mes';
+            return `${Math.floor(months)} meses`;
+        }
+        return `${Math.floor(years)} años`;
     },
 }));

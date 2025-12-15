@@ -2,7 +2,7 @@ import type { CardDetailsProps } from '@/common/interfaces/components/Dashboard/
 import '@/common/styles/components/Card/CardDetails/index.css';
 
 
-export const CardDetails = ({ children, user, className, title }: CardDetailsProps) => {
+export const CardDetails = ({ children, user, className = '', title }: CardDetailsProps) => {
     return (
         <div className={`card-Details ${className}`}>
             <div className="card-Details-content">
